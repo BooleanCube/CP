@@ -37,7 +37,7 @@ public class addemup {
                     flag = false;
                     break outer;
                 }
-	        }
+            }
         }
         if(flag) System.out.println("NO");
     }
