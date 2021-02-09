@@ -1,3 +1,4 @@
+# Credit: Spacecraft
 def main():
     N = int(input())
     worlds = input()
