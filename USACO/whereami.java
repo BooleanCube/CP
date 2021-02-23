@@ -1,3 +1,4 @@
+//http://www.usaco.org/index.php?page=viewproblem2&cpid=964
 import java.io.*;
 
 public class whereami {
