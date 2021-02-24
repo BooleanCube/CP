@@ -1,4 +1,5 @@
 //http://www.usaco.org/index.php?page=viewproblem2&cpid=964
+//9/10 test cases
 import java.io.*;
 
 public class whereami {
@@ -8,7 +9,7 @@ public class whereami {
         String farms = bf.readLine();
         int j = 1;
         int i = 0;
-        while(i+j<n) {
+        while(i+j<=n) {
             String c = farms.substring(i, i+j);
             if(count(farms, c) > 1) {++j; i=0;}
             ++i;
