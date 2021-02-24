@@ -1,5 +1,5 @@
 //http://www.usaco.org/index.php?page=viewproblem2&cpid=964
-//9/10 test cases
+//9/10 test cases right
 import java.io.*;
 
 public class whereami {
@@ -14,7 +14,7 @@ public class whereami {
             if(count(farms, c) > 1) {++j; i=0;}
             ++i;
         }
-        System.out.println(j+1);
+        System.out.println(j);
     }
     static int count(String str, String strFind) {
         String bruh = str.replaceAll(strFind, "");

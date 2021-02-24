@@ -1,29 +1,20 @@
 import java.io.*;
-import java.util.*;
 
 public class alphabet {
-	public static void main(String[] args) throws IOException {
-		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		String str = bf.readLine();
-		int counter = 0;
-		for(int i=1; i<str.length(); i++) {
-			int x = (int)str.charAt(i-1);
-			int y = (int)str.charAt(i);
-			if(y<x) {
-				int c1=0;
-				int c2=0;
-				for(int j=i+1; j<str.length(); j++) {
-					if(x<(int)str.charAt(j)) c1++;
-					if(y<(int)str.charAt(j)) c2++;
-				}
-				if(c2>c1) str = str.substring(0, i-1) + str.substring(i);
-				else str = str.substring(0, i) + str.substring(i+1);
-				i=0;
-				counter++;
-			}
-		}
-		System.out.println();
-		System.out.println(str);
-		System.out.println(counter);
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        String pat = bf.readLine();
+        String alph = "abcdefghijklmnopqrstuvwxyz";
+        int m = pat.length();
+        int n = alph.length();
+        int k[][] = new int[m+1][n+1];
+        for (int i=0; i<=m; i++) {
+            for (int j=0; j<=n; j++) {
+                if (i==0 || j==0) k[i][j] = 0;
+                else if (pat.charAt(i-1) == alph.charAt(j-1)) k[i][j] = 1 + k[i-1][j-1];
+                else k[i][j] = Math.max(k[i-1][j], k[i][j-1]);
+            }
+        }
+        System.out.println(26-k[m][n]);
+    }
 }
