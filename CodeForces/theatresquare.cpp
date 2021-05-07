@@ -1,3 +1,6 @@
+//accepted
+//watch out for scientific notation, wouldnt be a problem if you were solving with python.
+
 #include <iostream>
 #include <math.h>
 #include <stdio.h>
