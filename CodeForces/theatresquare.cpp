@@ -1,5 +1,5 @@
 //accepted
-//watch out for scientific notation, wouldnt be a problem if you were solving with python.
+//be careful about scientific notation with c++
 
 #include <iostream>
 #include <math.h>
