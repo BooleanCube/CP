@@ -13,3 +13,7 @@ https://atcoder.jp/
 
 
 My Goals: My goals for competitive programming with Kattis is that I start solving 7.0-9.0 difficulty questions easily by the time I reach senior year and my Kattis score should be atleast 600 pts.
+
+
+My Discord Username: BooleanCube#4690
+Discord Server: https://discord.gg/3ZDpPyR
