@@ -16,4 +16,5 @@ My Goals: My goals for competitive programming with Kattis is that I start solvi
 
 
 My Discord Username: BooleanCube#4690
+
 Discord Server: https://discord.gg/3ZDpPyR
