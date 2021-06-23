@@ -5,11 +5,10 @@ I do Competitive Programming almost everyday as a habit to get better at competi
 
 Websites to practice in:
 
-https://open.kattis.com/
-
-https://codeforces.com/
-
-https://atcoder.jp/
+https://open.kattis.com/ | 
+https://codeforces.com/ | 
+https://atcoder.jp/ | 
+http://www.usaco.org/index.php
 
 
 My Goals: My goals for competitive programming with Kattis is that I start solving 7.0-9.0 difficulty questions easily by the time I reach senior year and my Kattis score should be atleast 600 pts.
