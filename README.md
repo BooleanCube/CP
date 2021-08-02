@@ -10,6 +10,7 @@ https://codeforces.com/ |
 https://atcoder.jp/ | 
 http://www.usaco.org/index.php
 
+*If you click on the commits you can see some of the commits are actually problems and once you click on a certain problem you will get a link to the problem and and solution or wip solution right under it.*
 
 My Goals: My goals for competitive programming with Kattis is that I start solving 7.0-9.0 difficulty questions easily by the time I reach senior year and my Kattis score should be atleast 600 pts.
 
