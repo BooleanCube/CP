@@ -1,4 +1,4 @@
-//yea its aids, deal with it
+//yea its pretty bad, deal with it
 
 import java.io.*;
 import java.util.*;
