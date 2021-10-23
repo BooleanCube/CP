@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
   static HashMap<String, String> dictionary = new HashMap<String, String>();
-  static ArrayList<String> keys = new ArrayList<>(dictionary.keySet());
+  static ArrayList<String> keys = new ArrayList<>();
 
   public static void main(String[] args) throws IOException {
     init();
