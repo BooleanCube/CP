@@ -2,19 +2,19 @@ import java.io.*;
 import java.util.*;
 
 public class icepath {
-    
+
     static Point[][] map;
-    
+
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         int cases = Integer.parseInt(bf.readLine());
         while(cases-- > 0) {
-            
+
             StringTokenizer st = new StringTokenizer(bf.readLine());
             int n = Integer.parseInt(st.nextToken());
             int m = Integer.parseInt(st.nextToken());
             map = new Point[n][m];
-            
+
             Point start = null;
             for(int i=0; i<n; i++) {
                 char[] c = bf.readLine().toCharArray();
@@ -23,17 +23,17 @@ public class icepath {
                     map[i][j] = new Point(c[j], i, j, 0);
                 }
             }
-            
+
             System.out.println(bfs(start));
-            
+
         }
     }
-    
+
     public static int bfs(Point p) {
         ArrayDeque<Point> q = new ArrayDeque<>();
-        
+
         q.addLast(p);
-        
+
         while(!q.isEmpty()) {
             Point current = q.pollFirst();
             if(current.val == 'E') return current.counter;
@@ -83,18 +83,18 @@ public class icepath {
                 if(c==4) break;
             }
         }
-        
+
         return -1;
-        
+
     }
-    
+
     public static boolean isWall(int x, int y) {
         if(x<0 || x>=map.length) return true;
         if(y<0 || y>=map[0].length) return true;
         if(map[x][y].val == 'X') return true;
         return false;
     }
-    
+
 }
 
 class Point {
@@ -102,8 +102,8 @@ class Point {
     public int x;
     public int y;
     public int counter;
-    
-    public Point(char v, int x, int y, int c) {
+
+    public Point(char v, int x, int y, int c) { 
         val = v;
         this.x = x;
         this.y = y;

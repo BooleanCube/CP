@@ -49,4 +49,3 @@ public class addemup {
         return Integer.parseInt(new StringBuilder(num).reverse().toString());
     }
 }
-
