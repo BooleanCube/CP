@@ -6,6 +6,7 @@ public class messages {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         int end = 0;
         ArrayList<String> dictionary = new ArrayList<>();
+        StringBuilder word = new StringBuilder();
         while(true) {
             if(end == 0) {
                 String in = bf.readLine();
@@ -24,12 +25,18 @@ public class messages {
             if(end == 1) {
                 String c = bf.readLine();
                 if(c.equals("#")) break;
-                int count = 0;
-                for(String test : dictionary) {
-                    count += c.split(test, -1).length-1;
-                    c = c.replaceAll(test, "-");
+                for(int i=0; i<c.length(); i++) {
+                    if(c.substring(i, i+1).equals("|")) {
+                        String d = word.toString();
+                        int count = 0;
+                        for(String test : dictionary) {
+                            count += d.split(test, -1).length-1;
+                            d = d.replaceAll(test, "-");
+                        }
+                        word = new StringBuilder();
+                        System.out.println(count);
+                    } else word.append(c.substring(i, i+1));
                 }
-                System.out.println(count);
             }
         }
     }
