@@ -29,9 +29,16 @@ public class messages {
                     if(c.substring(i, i+1).equals("|")) {
                         String d = word.toString();
                         int count = 0;
-                        for(String test : dictionary) {
-                            count += d.split(test, -1).length-1;
-                            d = d.replaceAll(test, "-");
+                        for(int j=0; j<d.length();) {
+                        	String o = d;
+                        	for(String key : dictionary) {
+                        		if(d.startsWith(key)) {
+                        			++count;
+                        			d = d.substring(key.length());
+                        			break;
+                        		}
+                        	}
+                        	if(o.equals(d)) d = d.substring(1);
                         }
                         word = new StringBuilder();
                         System.out.println(count);
