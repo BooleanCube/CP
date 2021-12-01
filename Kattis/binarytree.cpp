@@ -7,7 +7,7 @@ int findIndex(string a) {
         char c = a.at(i);
         if(c == 'L') idx = idx*2;
         else if(c == 'R') idx = idx*2+1;
-        else if(idx != 1) idx = (int) ceil(idx/2.0);
+        else if(idx != 1) idx = (int) floor(idx/2.0);
     }
     return idx;
 }
