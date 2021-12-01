@@ -1,3 +1,4 @@
+//i attempted the problem in c++, to practice my c++ skillz so go check that one instead.
 import java.util.*;
 import java.io.*;
 
