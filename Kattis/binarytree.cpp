@@ -14,24 +14,24 @@ int findIndex(string a, int idnx) {
 
 unordered_set<string> getPermutations(string t) {
     unordered_set<string> *r = new unordered_set<string>();
-	deque<string> *stack = new deque<string>();
-	stack->push_back("");
-	r->insert("");
-	long unsigned int prevLength = 0;
-	long unsigned int s = -1;
-	for(long unsigned int i=0; i<stack->size(); i++) {
-		string prefix = stack->front();
-		stack->pop_front();
-		if(prefix.length() > prevLength) s=0;
-		else s++;
-		for(long unsigned int j=s; j<t.length(); j++) {
-			string total = prefix + t.at(j);
-			stack->push_back(total);
-			r->insert(total);
-			prevLength = prefix.length() + 1;
-		}
+    deque<string> *stack = new deque<string>();
+    stack->push_back("");
+    r->insert("");
+    long unsigned int prevLength = 0;
+    long unsigned int s = -1;
+    for(long unsigned int i=0; i<stack->size(); i++) {
+	string prefix = stack->front();
+	stack->pop_front();
+	if(prefix.length() > prevLength) s=0;
+	else s++;
+        for(long unsigned int j=s; j<t.length(); j++) {
+	    string total = prefix + t.at(j);
+	    stack->push_back(total);
+	    r->insert(total);
+	    prevLength = prefix.length() + 1;
 	}
-	return *r;
+    }
+    return *r;
 }
 
 int main() {
