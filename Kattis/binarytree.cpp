@@ -36,7 +36,7 @@ unordered_set<string> getPermutations(string t) {
 
 int main() {
     int n; cin >> n;
-	int o = n;
+    int o = n;
     while(n-- > 0) {
         string s; cin >> s;
         string t; cin >> t;
