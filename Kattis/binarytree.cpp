@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int findIndex(string a) {
-    int idx;
+int findIndex(string a, int idnx) {
+    int idx = idnx;
     for(int i=0; i<a.length(); i++) {
         char c = a.at(i);
         if(c == 'L') idx = idx*2;
@@ -12,8 +12,12 @@ int findIndex(string a) {
     return idx;
 }
 
-vector<string> getPermutations(string t) {
-    
+unordered_set<string> getPermutations(string t) {
+    unordered_set<string> *r = new unordered_set<string>();
+	deque<string> *stack = new deque<string>();
+	stack->push_back("");
+	//while
+	return *r;
 }
 
 int main() {
@@ -21,10 +25,10 @@ int main() {
     while(n-- > 0) {
         string s; cin >> s;
         string t; cin >> t;
-        int current = findIndex(s);
-        unordered_set<int> visitedIndexes = new unordered_set<>();
-        vector<string> p = getPermutations(t);
-        for(string a : p) unordered_set.insert(findIndex(a));
-        cout << sizeof(visitedIndexes)/sizeof(visitedIndexes[0]) << endl;
+        int current = findIndex(s, 1);
+        unordered_set<int> *visitedIndexes = new unordered_set<int>();
+        unordered_set<string> p = getPermutations(t);
+        for(string a : p) visitedIndexes->insert(findIndex(a, current));
+        cout << visitedIndexes->size() << endl;
     }
 }
