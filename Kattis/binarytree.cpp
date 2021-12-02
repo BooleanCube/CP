@@ -1,6 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+string shortCuts(string a) {
+    for(int i=0; i<a.length(); i++) {
+	a = a.substr(i);
+	if(a.find("LU") == 0 || a.find("RU") == 0) {
+	    if(a.length() > 2) a = a.substr(i+2);
+	    else { a = ""; return a; }
+	    i--;
+	}
+    }
+    return a;
+}
+
 int findIndex(string a, int idnx) {
     int idx = idnx;
     for(long unsigned int i=0; i<a.length(); i++) {
@@ -27,7 +39,7 @@ unordered_set<string> getPermutations(string t) {
         for(long unsigned int j=s; j<t.length(); j++) {
 	    string total = prefix + t.at(j);
 	    stack->push_back(total);
-	    r->insert(total);
+	    r->insert(shortCuts(total));
 	    prevLength = prefix.length() + 1;
 	}
     }
@@ -40,7 +52,7 @@ int main() {
     while(n-- > 0) {
         string s; cin >> s;
         string t; cin >> t;
-        int current = findIndex(s, 1);
+        int current = findIndex(shortCuts(s), 1);
         unordered_set<int> *visitedIndexes = new unordered_set<int>();
         unordered_set<string> p = getPermutations(t);
         for(string a : p) visitedIndexes->insert(findIndex(a, current));
