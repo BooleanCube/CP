@@ -3,12 +3,12 @@ using namespace std;
 
 string shortCuts(string a) {
     for(int i=0; i<a.length(); i++) {
-	a = a.substr(i);
-	if(a.find("LU") == 0 || a.find("RU") == 0) {
-	    if(a.length() > 2) a = a.substr(i+2);
-	    else { a = ""; return a; }
-	    i--;
-	}
+        a = a.substr(i);
+        if(a.find("LU") == 0 || a.find("RU") == 0) {
+            if(a.length() > 2) a = a.substr(i+2);
+            else { a = ""; return a; }
+            i--;
+        }
     }
     return a;
 }
@@ -32,16 +32,16 @@ unordered_set<string> getPermutations(string t) {
     long unsigned int prevLength = 0;
     long unsigned int s = -1;
     for(long unsigned int i=0; i<stack->size(); i++) {
-	string prefix = stack->front();
-	stack->pop_front();
-	if(prefix.length() > prevLength) s=0;
-	else s++;
+        string prefix = stack->front();
+        stack->pop_front();
+        if(prefix.length() > prevLength) s=0;
+        else s++;
         for(long unsigned int j=s; j<t.length(); j++) {
-	    string total = prefix + t.at(j);
-	    stack->push_back(total);
-	    r->insert(shortCuts(total));
-	    prevLength = prefix.length() + 1;
-	}
+            string total = prefix + t.at(j);
+            stack->push_back(total);
+            r->insert(shortCuts(total));
+            prevLength = prefix.length() + 1;
+        }
     }
     return *r;
 }
