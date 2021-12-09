@@ -12,3 +12,5 @@ for i in range(n):
 			visited.append(c)
 	if flag:
 		print("Emote away!")
+
+	
