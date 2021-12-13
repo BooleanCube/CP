@@ -17,30 +17,30 @@ public class Main {
 	}
 
     //I pressed enter for the first time in my life
-	static int getScore(String[][] board) {
+	static int getScore(String[][] board, int call) {
 		int sum = 0;
 		for(int i=0; i<board.length; i++) {
 			for(int j=0; j<board[i].length; j++) {
 				if(board[i][j] != null) sum += Integer.parseInt(board[i][j]);
 			}
 		}
-		return sum;
+		return sum * call;
 	}
 	static void clearCalls(String[][] board, String call) {
 		for(int i=0; i<board.length; i++) {
 			for(int j=0; j<board[i].length; j++) {
-				if(board[i][j].equals(call)) board[i][j] = null;
+				if(board[i][j] != null && board[i][j].equals(call)) board[i][j] = null;
 			}
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		String callNums = bf.readLine();
-		String[][][] boards = new String[][][];
+		String[][][] boards = new String[100][5][5];
 		for(int i=0; i<100; i++) {
 			bf.readLine();
-			for(int j=0; j<5; j++) boards[i][j] = bf.readLine().split("\\s+");
+			for(int j=0; j<5; j++) boards[i][j] = bf.readLine().trim().split("\\s+");
 		}
 		StringTokenizer calls = new StringTokenizer(callNums, ",");
 		outer:
@@ -49,7 +49,7 @@ public class Main {
 			for(int i=0; i<boards.length; i++) {
 				clearCalls(boards[i], call);
 				if(checkWin(boards[i])) {
-					System.out.println(getScore(boards[i]));
+					System.out.println(getScore(boards[i], Integer.parseInt(call)));
 					break outer;
 				}
 			}
