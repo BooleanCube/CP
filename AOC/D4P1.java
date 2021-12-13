@@ -16,8 +16,22 @@ public class Main {
 		return false;
 	}
 
-	static getScore(String[][] board) {
-
+    //I pressed enter for the first time in my life
+	static int getScore(String[][] board) {
+		int sum = 0;
+		for(int i=0; i<board.length; i++) {
+			for(int j=0; j<board[i].length; j++) {
+				if(board[i][j] != null) sum += Integer.parseInt(board[i][j]);
+			}
+		}
+		return sum;
+	}
+	static void clearCalls(String[][] board, String call) {
+		for(int i=0; i<board.length; i++) {
+			for(int j=0; j<board[i].length; j++) {
+				if(board[i][j].equals(call)) board[i][j] = null;
+			}
+		}
 	}
 
 	public static void main(String[] args) {
@@ -29,8 +43,16 @@ public class Main {
 			for(int j=0; j<5; j++) boards[i][j] = bf.readLine().split("\\s+");
 		}
 		StringTokenizer calls = new StringTokenizer(callNums, ",");
+		outer:
 		while(calls.hasMoreTokens()) {
-
+			String call = calls.nextToken();
+			for(int i=0; i<boards.length; i++) {
+				clearCalls(boards[i], call);
+				if(checkWin(boards[i])) {
+					System.out.println(getScore(boards[i]));
+					break outer;
+				}
+			}
 		}
 	}
 
