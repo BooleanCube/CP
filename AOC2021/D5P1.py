@@ -19,9 +19,9 @@ for i in range(500):
 		for i in range(len(nums)):
 			si = nums[i].split(",")
 			sx1 = int(si[0])
-			sx2 = int(si[1])
-			sx3 = int(si[2])
-			sx4 = int(si[3])
+			sy1 = int(si[1])
+			sx2 = int(si[2])
+			sy2 = int(si[3])
 			if ((sy1>=y1>=sy2 or sy1<=y1<=sy2) and (sx1>=x1>=sx2 or sx1<=x1<=sx2)) or ((sy1>=y2>=sy2 or sy1<=y2<=sy2) and (sx1>=x2>=sx2 or sx1<=x2<=sx2)):
 				count+=1
 	nums.append(str(x1)+","+str(y1)+","+str(x2)+","+str(y2))
