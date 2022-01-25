@@ -19,7 +19,7 @@ public class invert {
             boolean norm = true;
             int counter = 0;
             for(int j=0; j<c-1; j++) {
-                if((norm == true && world[j+1]-world[j]<k) &&
+                if((norm == true && world[j+1]-world[j]<k) ||
                    (norm == false && (r-world[j+1])-(r-world[j])<k)) {
                     norm = !norm;
                     ++counter;
