@@ -1,4 +1,4 @@
-//wrong answer because it no work when they both negative you bobo
+//wrong answer because it no work when they all negative you bobo
 #include <bits/stdc++.h>
 using namespace std;
  
