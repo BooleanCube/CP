@@ -1,31 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-int indexOf(int a[], int n, int startIdx) {
-
-}
+ 
+typedef long long ll;
  
 int main() {
-	int n, s; cin >> n >> s;
-	int a[n], o[n];
-	for(int i=0; i<n; i++) { cin >> a[i]; o[i] = a[i]; }
+	ll n, s; 
+	cin >> n >> s;
+	pair<ll,ll> a[n];
+	for(ll i=0; i<n; i++) { cin >> a[i].first; a[i].second = i+1; }
 	sort(a, a+n);
-	int l = 0, r = n-1;
-	bool met = 0;
-	while(l<r) {
-		if(a[l] + a[r] <= s) l++;
-		else {
-			int 
-			for(int i=l+1; i<r; i++) {
-
+	for(int i=0; i<n; i++) {
+		ll l = 0, r = n-1;
+		while(l<r && l<i && r>i) {
+			ll comp = s-a[i].first;
+			if(a[l].first+a[r].first == comp) {
+				cout << a[l].second << " " << a[i].second << " " << a[r].second << endl;
+				return 0;
 			}
-			r--;
-			int idxR = distance(o,find(o, o+n, a[r]))+1;
-			int idxL = distance(o,find(o, o+n, a[l]));
-			cout << to_string(idxR) << " " << to_string(n-idxL) << endl;
-			met = 1;
-			break;
+			else if(a[l].first+a[r].first > comp) r--;
+			else l++;
 		}
 	}
-	if(!met) cout << "IMPOSSIBLE" << endl;
+	cout << "IMPOSSIBLE" << endl;
 }
