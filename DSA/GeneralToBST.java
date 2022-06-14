@@ -21,7 +21,7 @@ public class GTB {
         System.out.println(general.toString());
 
         //Converting the General Tree into a Binary Tree
-		Tree BST = general.convertToBST();
+		    Tree BST = general.convertToBST();
 
         //Displaying the Binary Tree
         System.out.println(BST.toString());
