@@ -1,0 +1,6 @@
+n=int(input())
+k=int(input())
+i=int(input())
+if n>=i:print("ICE CREAM")
+elif n+k>=i:print("DRINK WATER")
+else:print("CANNOT EAT")
