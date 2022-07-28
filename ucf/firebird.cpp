@@ -1,5 +1,5 @@
 //this doesnt work rip
-//it still is a greedy solution though
+//i think it still is a greedy solution though
 
 #include <bits/stdc++.h>
 using namespace std;
