@@ -1,5 +1,2 @@
-i=int
-t=input
-n=i(t())
 m=10**9+7
-while n>0:a,b,c=map(i,t().split());print(pow(a,pow(b,c,m-1),m));n-=1
+for s in[*open(0)][1:]:a,*c=map(int,s.split());print(pow(a,pow(*c,m-1),m))
