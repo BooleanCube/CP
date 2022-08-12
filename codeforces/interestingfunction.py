@@ -1,5 +1,3 @@
-import math
-
 m = {}
 m[1] = 1
 for i in range(1,11):
@@ -39,11 +37,11 @@ for i in range(n):
     while s<e:
         #print(s,e,a)
         a = func(s)
-        counter += m[a]+countn(s//a)
-        s += a
-        if s > e:
+        if s+a > e:
             e-=s
             s=0
             continue
+        counter += m[a]+countn(s//a)
+        s += a
 
     print(counter)
