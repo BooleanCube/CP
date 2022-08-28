@@ -1,4 +1,5 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#include <cstdlib>
 using namespace std;
  
 using ll = long long;
@@ -22,7 +23,7 @@ void incrupdate(ll v, ll a, ll b, ll k, ll x, ll y) {
         return;
     }
     ll h = min(b,y)-max(a,x) + 1;
-    dfs(k); 
+    dfs(k);
     seg[k].first += h*v;
     incrupdate(v, a, b, 2*k, x, (x+y)/2);
     incrupdate(v, a, b, 2*k+1, (x+y)/2+1, y);
