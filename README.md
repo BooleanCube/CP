@@ -19,6 +19,6 @@ Goals:
 - 1500+ Codeforces rating
 - 100 Tasks on CSES
 
-My Discord Username: bool#4690
+My Discord Username: <b>bool#4690</b>
 
 Discord Server: https://discord.gg/3ZDpPyR
