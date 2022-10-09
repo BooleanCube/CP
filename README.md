@@ -16,7 +16,7 @@ https://atcoder.jp/
 
 Goals:
 - USACO Gold
-- 1500+ Codeforces rating
+- 1600+ Codeforces rating
 - 100 Tasks on CSES
 
 My Discord Username: <b>bool#4690</b>
