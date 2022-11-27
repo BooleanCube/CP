@@ -45,3 +45,5 @@ for i in range(n):
         s += a
 
     print(counter)
+
+
