@@ -7,8 +7,8 @@ int main() {
     int n, k;
     cin >> n >> k;
     vector<pair<int, int>> movies(n);
-    multiset<pair<int, int>> start;
-    for(int i=0; i<k; i++) start.insert(make_pair(-1, 0));
+    multiset<int> current;
+    for(int i=0; i<k; i++) current.insert(1);
     for(int i=0; i<n; i++) {
         int a, b;
         cin >> a >> b;
@@ -16,15 +16,12 @@ int main() {
     }
     sort(movies.begin(), movies.end());
     int counter = 0;
-    int current = 1;
     for(pair<int,int> movie : movies) {
-        if(movie.second < current) {
-            auto it = start.lower_bound(make_pair(current, 0));
-            pair<int, int> p = *(it);
-            if(p.first < current) continue;
-            counter++;
-            current = p.first;
-        }
+        auto it = current.upper_bound(movie.second);
+        if(it == begin(current)) continue;
+        current.erase(--it);
+        current.insert(movie.first);
+        counter++;
     }
     cout << counter << endl;
 }
