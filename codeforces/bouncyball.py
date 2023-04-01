@@ -1,73 +1,47 @@
-import sys
-input = sys.stdin.readline
-print = lambda l: sys.stdout.write(l)
-
 t = int(input())
-out = ""
 for _ in range(t):
-    h,w,si,sj,ei,ej,sd = input().split()
-    h=int(h);w=int(w);si=int(si);sj=int(sj);ei=int(ei);ej=int(ej)
-    v = set()
-    current = (si, sj, sd)
+    n, m, x1, y1, x2, y2, d_string = input().split()
+    n = int(n)
+    m = int(m)
+    x1 = int(x1)-1
+    x2 = int(x2)-1
+    y1 = int(y1)-1
+    y2 = int(y2)-1
+    d = (1 if d_string[0] == 'U' else 0) + (2 if d_string[1] == 'R' else 0)
+    vis = [[[False] * 4 for _ in range(m)] for _ in range(n)]
+    i = x1
+    j = y1
     bounces = 0
     flag = 1
-    while current not in v:
-        v.add(current)
-        d = current[2]
-        if d=="DR":
-            if ej-current[1] == ei-current[0] and ei-current[0]>=0:
-                flag = 0
-                break
-            dist = min(w-current[1], h-current[0])
-            current = (current[0]+dist, current[1]+dist)
-            bounces += 1
-            if current[1] == w and current[0] == h:
-                d = "UL"
-            elif current[1] == w:
-                d = "DL"
-            elif current[0] == h:
-                d = "UR"
-        elif d=="DL":
-            if current[1]-ej == ei-current[0] and ei-current[0]>=0:
-                flag = 0
-                break
-            dist = min(current[1]-1, h-current[0])
-            current = (current[0]+dist, current[1]-dist)
-            bounces += 1
-            if current[1] == 1 and current[0] == h:
-                d = "UR"
-            elif current[1] == 1:
-                d = "DR"
-            elif current[0] == h:
-                d = "UL"
-        elif d=="UR":
-            if ej-current[1] == current[0]-ei and current[0]-ei>=0:
-                flag = 0
-                break
-            dist = min(w-current[1], current[0]-1)
-            current = (current[0]-dist, current[1]+dist)
-            bounces += 1
-            if current[0] == 1 and current[1] == w:
-                d = "DL"
-            elif current[0] == 1:
-                d = "DR"
-            elif current[1] == w:
-                d = "UL"
-        elif d=="UL":
-            if current[1]-ej == current[0]-ei and current[0]-ei>=0:
-                flag = 0
-                break
-            dist = min(current[1]-1, current[0]-1)
-            current = (current[0]-dist, current[1]-dist)
-            bounces += 1
-            if current[0] == 1 and current[0] == 1:
-                d = "DR"
-            elif current[0] == 1:
-                d = "DL"
-            elif current[1] == 1:
-                d = "UR"
-        current = (current[0], current[1], d)
-    out += str(bounces)+"\n" if not flag else "-1\n"
-
-            
-print(out)
+    while not vis[i][j][d]:
+        if i == x2 and j == y2:
+            print(bounces)
+            flag = 0
+            break
+        na = 0
+        if d % 2 == 1 and i == 0:
+            d -= 1
+            na += 1
+        if d % 2 == 0 and i == n - 1:
+            d += 1
+            na += 1
+        if d >= 2 and j == m - 1:
+            d -= 2
+            na += 1
+        if d < 2 and j == 0:
+            d += 2
+            na += 1
+        bounces += min(1, na)
+        if vis[i][j][d]:
+            break
+        vis[i][j][d] = True
+        if d % 2 == 1:
+            i -= 1
+        else:
+            i += 1
+        if d >= 2:
+            j += 1
+        else:
+            j -= 1
+    if flag:
+        print(-1)
