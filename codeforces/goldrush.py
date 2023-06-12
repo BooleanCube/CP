@@ -10,3 +10,4 @@ t = int(input())
 for _ in range(t):
     n, m = map(int, input().split())
     print("yes" if n==m or (n%3 == 0 and m in dp[n]) else "no")
+

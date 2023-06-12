@@ -15,4 +15,5 @@ while len(ans) < len(nums):
         current %= n
         if current not in v:
             cnt += 1
-print(" ".join (map(str, ans)))
+print(" ".join(map(str, ans)))
+
