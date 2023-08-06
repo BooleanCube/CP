@@ -1,4 +1,4 @@
-#MLE on tc6
+# AC
 
 from bisect import bisect_right
 
@@ -20,9 +20,11 @@ while cur < xs[-1]:
     ncur = p[next][0]
     npidx = bisect_right(xs, ncur-1)
     nnext = xs[npidx]
-    step = next-ncur+dp[pidx]-dp[npidx]
+    step = (next-ncur+dp[pidx]-dp[npidx])%MOD
     if p[next][1]: ans += step
-    dp[pidx+1] = step+dp[pidx]
+    dp[pidx+1] = (step+dp[pidx])%MOD
     cur = next; ans %= MOD
+
+if ans < 0: ans += MOD
 
 print(ans)
