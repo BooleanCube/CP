@@ -33,7 +33,6 @@ def solve():
         deps[a].append(b)
         preqs[b].add(a)
     initset = set(preqs.keys())
-    largest = ([0] + sorted(preqs.keys()))[-1]
     for idx in range(1, n+1):
         if idx not in preqs:
             open.put((h[idx-1], idx))
@@ -43,7 +42,6 @@ def solve():
     while not open.empty():
         time, idx = open.get()
         if first == -1: first = time
-        if idx not in initset and idx > largest: mn = min(mn, cur+k-time)
         base = k*(time//k)
         for dep in deps[idx]:
             preqs[dep].remove(idx)
@@ -51,6 +49,8 @@ def solve():
                 del preqs[dep]
                 ntime, nidx = base+h[dep-1], dep
                 open.put((ntime+(k if ntime<time else 0), nidx))
+        if idx not in initset and (len(preqs) == 0 or idx > max(preqs.keys())):
+            mn = min(mn, cur+k-time)
         cur = time
     print(min(mn, cur-first))
 
