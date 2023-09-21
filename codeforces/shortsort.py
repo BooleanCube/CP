@@ -23,10 +23,9 @@ getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
 def solve():
-    n = getint()
-    l = getlist()
-    a = n - len(set(l))
-    print(n - (a+1)//2*2)
+    l = getstr()
+    a = int(l[0]=="a") + int(l[1]=="b") + int(l[2]=="c")
+    print("YES" if a>0 else "NO")
 
 testcases = 1
 testcases = getint()

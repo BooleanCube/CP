@@ -22,14 +22,24 @@ getint = lambda : int(input())
 getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
+def ceil(a, b):
+    return a//b + int(a%b>0)
+
 def solve():
-    n = getint()
-    l = getlist()
-    a = n - len(set(l))
-    print(n - (a+1)//2*2)
+    n, m = map(int, input().split())
+    p1, p2 = map(int, input().split())
+    q1, q2 = map(int, input().split())
+    if q2 > p2: p1,p2,q1,q2 = q1,q2,p1,p2
+    r1, r2 = p1/p2, q1/q2
+    l = list(map(int, input().split()))
+    for opp in l:
+        if q1>=opp: n-=q2
+        elif r1>r2: n-=p2*ceil(opp,p1)
+        else: n-=q2*ceil(opp,q1)
+    print(["YES", "NO"][n<=0])
 
 testcases = 1
-testcases = getint()
+#testcases = getint()
 for c in range(1, testcases+1):
     #write(f"Case {c}: ")
     solve()

@@ -11,7 +11,7 @@ import sys
 MOD = 10**9+7
 HMOD = 998244353
 MAXN = 10**5+5
-INF = 1e20
+INF = 1e18
 EPS = 1e-9
 
 input = lambda : sys.stdin.readline().strip()
@@ -23,10 +23,20 @@ getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
 def solve():
-    n = getint()
+    n, x = getlist()
     l = getlist()
-    a = n - len(set(l))
-    print(n - (a+1)//2*2)
+    lo, hi = 0, int(INF)
+    while lo <= hi:
+        mi = (lo+hi)//2
+        s = sum(max(0,mi-l[i]) for i in range(n))
+        if s > x: hi = mi-1
+        elif s < x: lo = mi+1
+        else: break
+    s, e = max(0,min(lo, hi)-10), max(lo,hi)+10
+    for i in range(e, s-1, -1):
+        if sum(max(0, i-l[j]) for j in range(n)) <= x:
+            print(i)
+            break
 
 testcases = 1
 testcases = getint()

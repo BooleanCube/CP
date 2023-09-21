@@ -22,11 +22,16 @@ getint = lambda : int(input())
 getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
+a = {0:1,1:2,2:3,3:4,4:5,5:5,6:4,7:3,8:2,9:1}
+
 def solve():
-    n = getint()
-    l = getlist()
-    a = n - len(set(l))
-    print(n - (a+1)//2*2)
+    grid = [getstr() for _ in range(10)]
+    s  =0
+    for i in range(10):
+        for j in range(10):
+            if grid[i][j] == "X":
+                s += min(a[i], a[j])
+    print(s)
 
 testcases = 1
 testcases = getint()

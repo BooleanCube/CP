@@ -23,10 +23,24 @@ getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
 def solve():
-    n = getint()
-    l = getlist()
-    a = n - len(set(l))
-    print(n - (a+1)//2*2)
+    n,k = getlist()
+    a = getlist()
+    h = getlist()
+    psum = [0]*(n+1)
+    for i in range(1, n+1): psum[i] = psum[i-1]+a[i-1]
+    dp = [i for i in range(n)]
+    ans = int(a[0] <= k)
+    for i in range(1, n):
+        if h[i-1]%h[i] == 0 and dp[i-1] != -1:
+            dp[i] = dp[i-1]
+        while psum[i+1]-psum[dp[i]] > k and dp[i]<i:
+            dp[i] += 1
+        if dp[i]==i and psum[i+1]-psum[dp[i]] >k:
+            dp[i] = -1
+        if dp[i] != -1 and psum[i+1]-psum[dp[i]] <= k:
+            ans = max(ans, i-dp[i]+1)
+    print(ans)
+
 
 testcases = 1
 testcases = getint()

@@ -25,8 +25,15 @@ getstr = lambda : list(input()) # mutable string
 def solve():
     n = getint()
     l = getlist()
-    a = n - len(set(l))
-    print(n - (a+1)//2*2)
+    l.sort(reverse=True)
+    ans = 0
+    for i in range(n):
+        l[i] += 1
+        p = 1
+        for c in l: p*= c
+        ans = max(ans, p)
+        l[i] -= 1
+    print(ans)
 
 testcases = 1
 testcases = getint()

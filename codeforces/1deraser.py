@@ -23,10 +23,16 @@ getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
 def solve():
-    n = getint()
-    l = getlist()
-    a = n - len(set(l))
-    print(n - (a+1)//2*2)
+    ans = 0
+    n, k = getlist()
+    l = getstr()
+    idx = 0
+    while idx<n:
+        if l[idx] == "B":
+            ans += 1
+            idx += k-1
+        idx += 1
+    print(ans)
 
 testcases = 1
 testcases = getint()
