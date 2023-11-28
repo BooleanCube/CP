@@ -1,1 +1,3 @@
-print(pow(2, int(input()), int(1e9+7)))
+a, MOD = 1, int(1e9+7)
+for _ in range(int(input())): a *= 2; a %= MOD
+print(a)
