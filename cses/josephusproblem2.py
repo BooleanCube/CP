@@ -7,11 +7,11 @@ def find(x):
     par[x] = find(par[x])
     return par[x]
 
-def mergel(a, b):
+def merger(a, b):
     a, b = find(a), find(b)
     par[min(a,b)] = max(a,b)
 
-def merger(a, b):
+def mergel(a, b):
     a, b = find(a), find(b)
     par[a] = b
 
@@ -25,11 +25,12 @@ ans = []
 while len(ans) < len(nums):
     v.add(current)
     ans.append(nums[current])
-    if (current+1)%n in v: merger(current, (current+1)%n)
-    if (current-1)%n in v: mergel((current-1)%n-(n if (current-1)%n==n-1 else 0), current)
+    if (current+1)%n in v: mergel(current, (current+1)%n)
+    if (current-1)%n in v: merger((current-1)%n-(n if (current-1)%n==n-1 else 0), current)
     cnt = 0
     if len(ans) >= len(nums): break
     steps = k%(n-len(ans))
+    if steps == 0: steps += (n-len(ans))
     while cnt <= steps:
         current = (current+1)%n
         if current in v: current = (find(current)+1)%n
