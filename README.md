@@ -15,10 +15,10 @@ https://atcoder.jp/
 *If you click on the commits you can see some commits are actually problems and once you click on a certain problem you will get a link to the problem an and solution or wip solution right under it.*
 
 Goals:
-- USACO Gold
-- 1600+ Codeforces rating
-- 100 Tasks on CSES
+- ICPC SER Top 3
+- 1600+ Codeforces rating (Expert)
+- 200 Tasks on CSES
 
-My Discord Username: <b>bool#4690</b>
+My Discord Username: <b>booleancube</b>
 
 Discord Server: https://discord.gg/3ZDpPyR
