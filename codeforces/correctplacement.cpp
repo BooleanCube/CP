@@ -42,7 +42,7 @@ void no() { cout<<"NO\n"; }
 /* FUNCTIONS */
 #define sz(a) ((int)a.size())
 #define all(a) (a).begin(), (a).end()
-#define fr(i,s,e) for(long long int i=(s);i<(e);i++)
+#define fr(i,s,e) for(int i=(s);i<(e);i++)
 #define frn(i,n) fr(i,0,(n))
 #define cfr(i,s,e) for(long long int i=(s);i<=(e);i++)
 #define rfr(i,e,s) for(long long int i=(e)-1;i>=(s);i--)
@@ -66,11 +66,12 @@ bool chk(array<int, 3> a, array<int, 3> b) {
 
 void solve() {
     int n; cin >> n;
-    vector<array<int, 3>> rects(n);
+    vector<array<int, 3>> rects;
     frn(i, n) {
-        cin >> rects[i][0] >> rects[i][1];
-        rects[i][2] = i+1;
-        if(rects[i][0] > rects[i][1]) swap(rects[i][0], rects[i][1]);
+        int h, w;
+        cin >> h >> w;
+        rects.push_back({h, w, i+1});
+        rects.push_back({w, h, i+1});
     }
     sort(all(rects));
     vector<int> ans(n);
@@ -78,9 +79,10 @@ void solve() {
     array<int, 3> temp = rects[0];
     frn(i, n) {
         int idx = rects[i][2] - 1;
+        if(ans[idx] > -1) continue;
         if(chk(mn, rects[i])) ans[idx] = mn[2];
         else ans[idx] = -1;
-        if(rects[i][1] < mn[1]) temp = rects[i];
+        if(rects[i][1] < temp[1]) temp = rects[i];
         if(i < n-1 && rects[i][0] < rects[i+1][0]) mn = temp;
     }
     printv(ans);
@@ -97,4 +99,3 @@ int main() {
         solve();
     }
 }
-
