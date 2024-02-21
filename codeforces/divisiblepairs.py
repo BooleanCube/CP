@@ -23,22 +23,17 @@ getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
 def solve():
-    n, m = getlist()
-    a, c = getlist(), getlist()
-    a.sort(); c.sort(reverse=True)
-    pref, suff = [0]*(m+1), [0]*(m+1)
-    for i in range(1, m+1):
-        pref[i] = pref[i-1] + c[i-1]
-        suff[-i-1] = suff[-i] + c[-i]
-    ps, ss = 0, sum(a)
+    n, x, y = getlist()
+    l = getlist()
+    l = [(l[i]%x, l[i]%y) for i in range(n)]
+    fq = OrderedDict()
     ans = 0
-    for i in range(n+1):
-        pc, sc = i, (m-n)+i
-        diff = abs(ps-pref[pc]) + abs(ss-suff[sc])
-        if i<n:
-            ps += a[i]
-            ss -= a[i]
-        ans = max(ans, diff)
+    for i in range(n):
+        a, b = l[i]
+        t = ((x-a)%x, b)
+        ans += fq[t] if t in fq else 0
+        if l[i] in fq: fq[l[i]] += 1
+        else: fq[l[i]] = 1
     print(ans)
 
 testcases = 1

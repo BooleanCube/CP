@@ -22,24 +22,23 @@ getint = lambda : int(input())
 getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
+def cntlz(s):
+    cnt = 0
+    for i in range(len(s)):
+        if s[i] != "0": break
+        cnt += 1
+    return cnt
+
 def solve():
     n, m = getlist()
-    a, c = getlist(), getlist()
-    a.sort(); c.sort(reverse=True)
-    pref, suff = [0]*(m+1), [0]*(m+1)
-    for i in range(1, m+1):
-        pref[i] = pref[i-1] + c[i-1]
-        suff[-i-1] = suff[-i] + c[-i]
-    ps, ss = 0, sum(a)
-    ans = 0
-    for i in range(n+1):
-        pc, sc = i, (m-n)+i
-        diff = abs(ps-pref[pc]) + abs(ss-suff[sc])
-        if i<n:
-            ps += a[i]
-            ss -= a[i]
-        ans = max(ans, diff)
-    print(ans)
+    l = input().split()
+    lz = [cntlz(l[i][::-1]) for i in range(n)]
+    lz.sort(reverse=True)
+    cnt = 0
+    for i in range(n):
+        cnt += len(l[i])
+    zr = sum(lz[0::2])
+    print(("Sasha" if cnt-zr >= m+1 else "Anna"))
 
 testcases = 1
 testcases = getint()
