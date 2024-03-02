@@ -1,11 +1,7 @@
-t = int(input())
-
-for _ in range(t):
+for _ in range(int(input())):
     n = int(input())
-    l = []
+    mxb, mxi = 0, 0
     for i in range(n):
         a,b = map(int, input().split())
-        if a<=10:
-            l.append((b, i+1))
-
-    print(max(l)[1])
+        if a<=10 and b > mxb: mxb, mxi = b, i+1
+    print(mxi)

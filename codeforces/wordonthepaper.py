@@ -1,10 +1,5 @@
-t = int(input())
-
-for _ in range(t):
-    word = ""
+for _ in range(int(input())):
+    ans = ""
     for i in range(8):
-        l = input()
-        for c in l:
-            if c.isalpha():
-                word += c
-    print(word)
+        ans += "".join([c for c in input() if c.isalpha()])
+    print(ans)
