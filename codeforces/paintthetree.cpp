@@ -1,0 +1,131 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+/* TYPES  */
+#define ll long long
+#define ld long double
+#define pii pair<int, int>
+#define pll pair<long long, long long>
+#define vi vector<int>
+#define vll vector<long long>
+#define mii map<int, int>
+#define si set<int>
+#define sc set<char>
+
+/* CONSTANTS */
+#define f first
+#define s second
+#define sp <<" "<<
+#define endl '\n'
+const int MAXN = 1e5+5;
+const ll MOD = 1e9+7;
+const ll HMOD = 998244353;
+const ll INF = 1e9;
+const ld PI = 3.1415926535897932384626433832795;
+const ld EPS = 1e-9;
+
+/* UTILS */
+#define read(type) readInt<type>()
+ll min(ll a,int b) { if (a<b) return a; return b; }
+ll min(int a,ll b) { if (a<b) return a; return b; }
+ll max(ll a,int b) { if (a>b) return a; return b; }
+ll max(int a,ll b) { if (a>b) return a; return b; }
+ll gcd(ll a,ll b) { if (b==0) return a; return gcd(b, a%b); }
+ll lcm(ll a,ll b) { return a/gcd(a,b)*b; }
+string to_upper(string a) { for (int i=0;i<(int)a.size();++i) if (a[i]>='a' && a[i]<='z') a[i]-='a'-'A'; return a; }
+string to_lower(string a) { for (int i=0;i<(int)a.size();++i) if (a[i]>='A' && a[i]<='Z') a[i]+='a'-'A'; return a; }
+bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a%i==0) return 0; return 1; }
+void yes() { cout<<"YES\n"; }
+void no() { cout<<"NO\n"; }
+
+/* FUNCTIONS */
+#define sz(a) ((int)a.size())
+#define all(a) (a).begin(), (a).end()
+#define fr(i,s,e) for(long long int i=(s);i<(e);i++)
+#define frn(i,n) fr(i,0,(n))
+#define cfr(i,s,e) for(long long int i=(s);i<=(e);i++)
+#define rfr(i,e,s) for(long long int i=(e)-1;i>=(s);i--)
+#define afr(a) for(auto u:a)
+#define pb push_back
+#define eb emplace_back
+
+/* DEBUGGING && PRINTING */
+#define printv(a) {for(auto u:a) cout<<u<<" "; cout<<endl;}
+#define printm(a) {for(auto u:a) cout<<u.f sp u.s<<endl;}
+
+/*  All Required define Pre-Processors and typedef Constants */
+typedef long int int32;
+typedef unsigned long int uint32;
+typedef long long int int64;
+typedef unsigned long long int uint64;
+
+
+int n, a, b;
+vector<vi> tree;
+
+int dfs1(int u, int p, int dest, vi &bb) {
+    if(u == dest) return 1;
+    int ans = 0;
+    for(int v : tree[u]) {
+        if(v == p) continue;
+        bb[v] = u;
+        ans = max(ans, dfs1(v, u, dest, bb)+1);
+    }
+    return ans;
+}
+
+ll dfs2(int u, int p) {
+    if(sz(tree[u]) == 1 && tree[u][0] == p) return 0;
+    ll ans = 0;
+    for(int v : tree[u]) {
+        if(v == p) continue;
+        ans += dfs2(v, u) + 2;
+    }
+    return ans;
+}
+
+int height(int u, int p) {
+    if(sz(tree[u]) == 1 && tree[u][0] == p) return 0;
+    int ans = 0;
+    for(int v : tree[u]) {
+        if(v == p) continue;
+        ans = max(ans, height(v, u)+1);
+    }
+    return ans;
+}
+
+void solve() {
+    cin >> n >> a >> b; a--, b--;
+    tree = vector<vi>(n);
+    frn(i, n-1) {
+        int xi, yi; cin >> xi >> yi;
+        xi--, yi--;
+        tree[xi].pb(yi);
+        tree[yi].pb(xi);
+    }
+    vi bb(n);
+    int pl = dfs1(a, -1, b, bb);
+    int st = pl >> 1;
+    vi path;
+    for(int i=b; i!=a;) {
+        path.pb(i);
+        i = bb[i];
+    } path.pb(a);
+    int root = path[sz(path) >> 1];
+    ll ans = dfs2(root, -1) - height(root, -1) + ((pl+1) >> 1) - 1;
+    cout << ans << endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int tc = 1;
+    cin >> tc;
+    cfr(t, 1, tc) {
+        // cout << "Case #" << t << ": ";
+        solve();
+    }
+}
+
