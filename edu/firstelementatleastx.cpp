@@ -56,32 +56,32 @@ struct segtree {
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     cin.exceptions(cin.failbit);
- 
-	int n, m; cin >> n >> m;
-	vi rooms(n), groups(m);
-	for(auto &u : rooms) cin >> u;
-	for(auto &u : groups) cin >> u;
- 
-	segtree<ll> seg(n);
-	for(int i=0; i<n; i++) seg.update(i, i, rooms[i]);
- 
-	vi ans(m);
-	for(int i=0; i<m; i++) {
-		int group = groups[i];
-        int lo = 0, hi = n-1;
-        while(lo < hi) {
-            int mid = (lo + hi) / 2;
-            int val = seg.query(0, mid);
-            if(val >= group) hi = mid;
-            else lo = mid+1;
+
+    int n, m; cin >> n >> m;
+    vi a(n); for(auto &u : a) cin >> u;
+
+    segtree<ll> seg(n);
+    for(int i=0; i<n; i++) seg.update(i, i, a[i]);
+
+    for(int i=0; i<m; i++) {
+        int op; cin >> op;
+        if(op - 1) {
+            int x; cin >> x;
+            int lo = 0, hi = n-1;
+            while(lo < hi) {
+                int mid = (lo + hi) / 2;
+                int val = seg.query(0, mid);
+                if(val >= x) hi = mid;
+                else lo = mid+1;
+            }
+            int val = seg.query(0, lo);
+            cout << (val < x ? -1 : lo) << endl;
         }
-        int val = seg.query(0, lo);
-        if(val < group) { ans[i] = 0; continue; }
-		ans[i] = lo + 1;
-		seg.update(lo, lo, val-group);
-	}
- 
-	for(int i=0; i<m; i++) cout << ans[i] << " \n"[i==m-1];
- 
+        else {
+            int idx, val; cin >> idx >> val;
+            seg.update(idx, idx, val);
+        }
+    }
+
     return 0;
 }

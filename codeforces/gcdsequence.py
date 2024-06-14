@@ -24,21 +24,27 @@ getstr = lambda : list(input()) # mutable string
 
 def solve():
     n = getint()
-    p = getlist()[::-1]
-    ans, cnt, ops = [], 1, 0
-    diffs = []
-    for i in range(1, n):
-        if p[i] > p[i-1]:
-            diff = p[i] - p[i-1]
-            diffs.append((diff, i))
-    diffs.sort()
-    for diff, i in diffs:
-        while diff > 0:
-            diff -= cnt
-            ans.append(n-i+1)
-            cnt += 1; ops += 1
-    for _ in range(n - ops): ans.append(1)
-    print(*ans)
+    a = getlist()
+    g = [math.gcd(a[i-1], a[i]) for i in range(1, n)]
+    idx = [i for i in range(1, len(g)) if g[i] < g[i-1]]
+    if not idx:
+        print("YES")
+        return
+    idx = idx[0] + 1
+    # print(idx)
+    if idx > 1:
+        x = a[:idx-2] + a[idx-1:]
+        # print(x)
+        x = [math.gcd(x[i-1], x[i]) for i in range(1, n-1)]
+        # print(x)
+        if x == sorted(x):
+            print("YES")
+            return
+    y, z = a[:idx] + a[idx+1:], a[:idx-1] + a[idx:]
+    # print(y, z)
+    y, z = [math.gcd(y[i-1], y[i]) for i in range(1, n-1)], [math.gcd(z[i-1], z[i]) for i in range(1, n-1)]
+    # print(y, z)
+    print("YES" if y == sorted(y) or z == sorted(z) else "NO")
 
 testcases = 1
 testcases = getint()

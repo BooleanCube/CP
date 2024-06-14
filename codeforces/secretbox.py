@@ -23,22 +23,19 @@ getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
 def solve():
-    n = getint()
-    p = getlist()[::-1]
-    ans, cnt, ops = [], 1, 0
-    diffs = []
-    for i in range(1, n):
-        if p[i] > p[i-1]:
-            diff = p[i] - p[i-1]
-            diffs.append((diff, i))
-    diffs.sort()
-    for diff, i in diffs:
-        while diff > 0:
-            diff -= cnt
-            ans.append(n-i+1)
-            cnt += 1; ops += 1
-    for _ in range(n - ops): ans.append(1)
-    print(*ans)
+    x, y, z, k = getlist()
+    dims = []
+    for i in range(1, x+1):
+        if k % i: continue
+        for j in range(1, y+1):
+            if i * j > k: break
+            if (k // i) % j: continue
+            if (k // (i*j)) > z: continue
+            dims.append((i, j, k // (i*j)))
+    ans = 0
+    for dx, dy, dz in dims:
+        ans = max(ans, (x-dx+1)*(y-dy+1)*(z-dz+1))
+    print(ans)
 
 testcases = 1
 testcases = getint()
