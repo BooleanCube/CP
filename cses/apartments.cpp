@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-#include <iterator>
-#include <valarray>
 using namespace std;
 
 #define ll long long

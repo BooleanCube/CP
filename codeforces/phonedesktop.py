@@ -23,22 +23,15 @@ getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
 def solve():
-    n = getint()
-    p = getlist()[::-1]
-    ans, cnt, ops = [], 1, 0
-    diffs = []
-    for i in range(1, n):
-        if p[i] > p[i-1]:
-            diff = p[i] - p[i-1]
-            diffs.append((diff, i))
-    diffs.sort()
-    for diff, i in diffs:
-        while diff > 0:
-            diff -= cnt
-            ans.append(n-i+1)
-            cnt += 1; ops += 1
-    for _ in range(n - ops): ans.append(1)
-    print(*ans)
+    y, x = getlist()
+    if x == y == 0:
+        print(0)
+        return
+    ans = (x + 1) >> 1
+    exc = 0
+    if x & 1: exc += (ans - 1) * 7 + 11
+    else: exc += ans * 7
+    print(ans + max(0, (y - exc + 14) // 15))
 
 testcases = 1
 testcases = getint()

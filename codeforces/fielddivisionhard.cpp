@@ -1,0 +1,135 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+/* TYPES  */
+#define ll long long
+#define ld long double
+#define pii pair<int, int>
+#define pll pair<long long, long long>
+#define vi vector<int>
+#define vll vector<long long>
+#define mii map<int, int>
+#define si set<int>
+#define sc set<char>
+
+/* CONSTANTS */
+#define f first
+#define s second
+#define sp <<" "<<
+#define endl '\n'
+const int MAXN = 1e5+5;
+const ll MOD = 1e9+7;
+const ll HMOD = 998244353;
+const ll INF = 1e9;
+const ld PI = 3.1415926535897932384626433832795;
+const ld EPS = 1e-9;
+
+/* UTILS */
+#define read(type) readInt<type>()
+ll min(ll a,int b) { if (a<b) return a; return b; }
+ll min(int a,ll b) { if (a<b) return a; return b; }
+ll max(ll a,int b) { if (a>b) return a; return b; }
+ll max(int a,ll b) { if (a>b) return a; return b; }
+ll gcd(ll a,ll b) { if (b==0) return a; return gcd(b, a%b); }
+ll lcm(ll a,ll b) { return a/gcd(a,b)*b; }
+string to_upper(string a) { for (int i=0;i<(int)a.size();++i) if (a[i]>='a' && a[i]<='z') a[i]-='a'-'A'; return a; }
+string to_lower(string a) { for (int i=0;i<(int)a.size();++i) if (a[i]>='A' && a[i]<='Z') a[i]+='a'-'A'; return a; }
+bool prime(ll a) { if (a==1) return 0; for (int i=2;i<=round(sqrt(a));++i) if (a%i==0) return 0; return 1; }
+void yes() { cout<<"YES\n"; }
+void no() { cout<<"NO\n"; }
+
+/* FUNCTIONS */
+#define sz(a) ((int)a.size())
+#define all(a) (a).begin(), (a).end()
+#define fr(i,s,e) for(long long int i=(s);i<(e);i++)
+#define frn(i,n) fr(i,0,(n))
+#define cfr(i,s,e) for(long long int i=(s);i<=(e);i++)
+#define rfr(i,e,s) for(long long int i=(e)-1;i>=(s);i--)
+#define afr(a) for(auto &u:a)
+#define pb push_back
+#define eb emplace_back
+
+/* DEBUGGING && PRINTING */
+#define printv(a) {for(auto u:a) cout<<u<<" "; cout<<endl;}
+#define printm(a) {for(auto u:a) cout<<u.f sp u.s<<endl;}
+
+/*  All Required define Pre-Processors and typedef Constants */
+typedef long int int32;
+typedef unsigned long int uint32;
+typedef long long int int64;
+typedef unsigned long long int uint64;
+
+
+void solve() {
+    ll n, m, k; cin >> n >> m >> k;
+    map<int, vector<pll>> ft;
+    frn(i, k) {
+        ll ri, ci; cin >> ri >> ci;
+        ft[ci].pb({ri, i});
+    }
+    afr(ft) sort(all(u.s));
+    ll cr = 1, cc = 1;
+    vi aff;
+    vector<pll> last, slst;
+    if(ft.count(1)) {
+        ll lv = ft[1].back().f, slv = sz(ft[1]) > 1 ? ft[1][sz(ft[1])-2].f : 0;
+        cr = lv + 1;
+        aff.pb(ft[1].back().s);
+        last.pb({lv, 1});
+        slst.pb({slv, 1});
+    }
+    ll ans = 0;
+    while(cr <= n && cc <= m) {
+        auto it = ft.upper_bound(cc);
+        if(it == ft.end()) {
+            ans += (n - cr + 1) * (m - cc + 1);
+            break;
+        }
+        ll nc = it->f; pll nr = it->s.back();
+        ll lv = it->s.back().f, slv = sz(it->s) > 1 ? it->s[sz(it->s)-2].f : 0;
+        ans += (n - cr + 1) * (nc - cc);
+        cc = nc;
+        if(nr.f >= cr) {
+            cr = nr.f + 1;
+            aff.pb(nr.s);
+            last.pb({lv, cc});
+            slst.pb({slv, cc});
+        }
+    }
+    cout << ans << endl;
+    printm(last);
+    printm(slst);
+    vll arr(k);
+    int z = sz(aff);
+    frn(i, z) {
+        int idx = aff[i];
+        ll org = ans;
+        ll nxt = (i == z-1) ? m+1 : last[i+1].s;
+        org -= (n - last[i].f + 1) * (nxt - last[i].s);
+        org += (n - slst[i].f + 1) * (nxt - slst[i].s);
+        if(idx == 0) { arr[idx] = org; continue; }
+
+        ll cur = max(last[i-1].f, slst[i].f + 1);
+        org -= (n - last[i-1].f + 1) * (last[i].s - last[i-1].s);
+        org -= (n - last[i].f + 1) * (nxt - last[i].s);
+        org += (n - last[i-1].f + 1) * (slst[i].s - last[i-1].s);
+        org += (n - cur + 1) * (nxt - slst[i].s);
+
+        arr[idx] = org - ans;
+    }
+    printv(arr);
+}
+
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int tc = 1;
+    cin >> tc;
+    cfr(t, 1, tc) {
+        // cout << "Case #" << t << ": ";
+        solve();
+    }
+}
+

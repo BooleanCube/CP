@@ -23,25 +23,24 @@ getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
 def solve():
-    n = getint()
-    p = getlist()[::-1]
-    ans, cnt, ops = [], 1, 0
-    diffs = []
-    for i in range(1, n):
-        if p[i] > p[i-1]:
-            diff = p[i] - p[i-1]
-            diffs.append((diff, i))
-    diffs.sort()
-    for diff, i in diffs:
-        while diff > 0:
-            diff -= cnt
-            ans.append(n-i+1)
-            cnt += 1; ops += 1
-    for _ in range(n - ops): ans.append(1)
-    print(*ans)
+    n, q = getlist()
+    grid = [[[[], defaultdict(int)] for _ in range(n)] for _ in range(n)]
+    for _ in range(q):
+        line = input().split()
+        op = int(line[0])
+        if op == 0:
+            l, x, y = line[1], int(line[2]), int(line[3])
+            grid[x][y][0].append(l)
+            grid[x][y][1][l] += 1
+        if op == 1:
+            x, y = map(int, line[1:])
+            l = grid[x][y][0].pop(-1)
+            grid[x][y][1][l] -= 1
+        if op == 2:
+            l, x, y = line[1], int(line[2]), int(line[3])
+            print("yes" if grid[x][y][1][l] > (len(grid[x][y][0]) / 2) else "no")
 
 testcases = 1
-testcases = getint()
 for c in range(1, testcases+1):
     #write(f"Case {c}: ")
     solve()

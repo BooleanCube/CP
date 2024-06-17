@@ -24,21 +24,24 @@ getstr = lambda : list(input()) # mutable string
 
 def solve():
     n = getint()
-    p = getlist()[::-1]
-    ans, cnt, ops = [], 1, 0
-    diffs = []
-    for i in range(1, n):
-        if p[i] > p[i-1]:
-            diff = p[i] - p[i-1]
-            diffs.append((diff, i))
-    diffs.sort()
-    for diff, i in diffs:
-        while diff > 0:
-            diff -= cnt
-            ans.append(n-i+1)
-            cnt += 1; ops += 1
-    for _ in range(n - ops): ans.append(1)
-    print(*ans)
+    a = getlist()
+    if sum(a) == 0:
+        print(1)
+        return
+    ans = 0
+    for bit in range(21):
+        mr, cr, f = 1, 1, 1
+        for i in range(n):
+            f &= 1 ^ (a[i] >> bit)
+            if ((a[i] >> bit) & 1) == 0:
+                cr += 1
+                continue
+            mr = max(mr, cr)
+            cr = 1
+        mr = max(mr, cr)
+        if f: continue
+        ans = max(ans, mr)
+    print(ans)
 
 testcases = 1
 testcases = getint()

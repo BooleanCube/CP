@@ -22,23 +22,33 @@ getint = lambda : int(input())
 getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
+
+def fastexpo(b, e):
+    if e == 0: return 1
+    if e == 1: return b % MOD
+    t = (fastexpo(b, e>>1) ** 2) % MOD
+    if e & 1: return (b * t) % MOD
+    return t
+
+def invmod(i):
+    if i == 1: return 1
+    return (MOD - ((MOD//i) * invmod(MOD % i)) % MOD + MOD) % MOD
+
+def geomseries(r, n):
+    if n < 0: return 0
+    return ((fastexpo(r, n+1) - 1) * invmod(r - 1)) % MOD
+
+def geomseriesrng(d, l, r):
+    return (geomseries(d, r-1) - geomseries(d, l-1)) % MOD
+
 def solve():
-    n = getint()
-    p = getlist()[::-1]
-    ans, cnt, ops = [], 1, 0
-    diffs = []
-    for i in range(1, n):
-        if p[i] > p[i-1]:
-            diff = p[i] - p[i-1]
-            diffs.append((diff, i))
-    diffs.sort()
-    for diff, i in diffs:
-        while diff > 0:
-            diff -= cnt
-            ans.append(n-i+1)
-            cnt += 1; ops += 1
-    for _ in range(n - ops): ans.append(1)
-    print(*ans)
+    l, r, k = getlist()
+    d = 9 // k
+    if d == 0:
+        print(0)
+        return
+    ans = (d * geomseriesrng(d+1, l, r)) % MOD
+    print(ans)
 
 testcases = 1
 testcases = getint()

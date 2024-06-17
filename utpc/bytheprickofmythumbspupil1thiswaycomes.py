@@ -22,26 +22,36 @@ getint = lambda : int(input())
 getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
+
+def dfs(u, p, par, graph):
+    par[u] = p
+    for v in graph[u]:
+        if v == p :continue
+        dfs(v, u, par, graph)
+
 def solve():
     n = getint()
-    p = getlist()[::-1]
-    ans, cnt, ops = [], 1, 0
-    diffs = []
+    r = getlist()
+    par = [0]*n
+    graph = [[] for _ in range(n)]
+    for i in range(n-1):
+        a, b = getlist()
+        a -= 1; b -= 1
+        graph[a].append(b)
+        graph[b].append(a)
+    dfs(0, 0, par, graph)
+    vis = [0]*n
     for i in range(1, n):
-        if p[i] > p[i-1]:
-            diff = p[i] - p[i-1]
-            diffs.append((diff, i))
-    diffs.sort()
-    for diff, i in diffs:
-        while diff > 0:
-            diff -= cnt
-            ans.append(n-i+1)
-            cnt += 1; ops += 1
-    for _ in range(n - ops): ans.append(1)
-    print(*ans)
+        if r[i] >= r[0]:
+            j = i
+            while j and par[j]:
+                if vis[par[j]]: break
+                j = par[j]
+                vis[j] = 1
+    print(sum(vis))
 
 testcases = 1
-testcases = getint()
+# testcases = getint()
 for c in range(1, testcases+1):
     #write(f"Case {c}: ")
     solve()

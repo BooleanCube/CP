@@ -22,26 +22,26 @@ getint = lambda : int(input())
 getlist = lambda : list(map(int, input().split()))
 getstr = lambda : list(input()) # mutable string
 
+MAXX = 1000
+
 def solve():
     n = getint()
-    p = getlist()[::-1]
-    ans, cnt, ops = [], 1, 0
-    diffs = []
-    for i in range(1, n):
-        if p[i] > p[i-1]:
-            diff = p[i] - p[i-1]
-            diffs.append((diff, i))
-    diffs.sort()
-    for diff, i in diffs:
-        while diff > 0:
-            diff -= cnt
-            ans.append(n-i+1)
-            cnt += 1; ops += 1
-    for _ in range(n - ops): ans.append(1)
-    print(*ans)
+    s = list(map(int, getstr()))
+    fq = defaultdict(int)
+    for i in range(n):
+        a, b = getlist()
+        if s[i]:
+            for i in range(b): fq[i] += 1
+            for i in range(b+a, MAXX-a, a+a):
+                for j in range(i, i+a): fq[j] += 1
+        else:
+            for i in range(b, MAXX-a, a+a):
+                for j in range(i, i+a):
+                    fq[j] += 1
+    print(max(fq.values()))
 
 testcases = 1
-testcases = getint()
+# testcases = getint()
 for c in range(1, testcases+1):
     #write(f"Case {c}: ")
     solve()
