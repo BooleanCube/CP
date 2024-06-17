@@ -35,4 +35,8 @@ int main() {
     cout << (a[0] + a[1]) % MOD << endl;
 
     return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 30b8cb9031ac2bbf698ac77e0f2d8cb21a99ebd2
